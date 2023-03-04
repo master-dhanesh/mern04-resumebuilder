@@ -4,11 +4,9 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "start": "node app.js",
-        "dev": "nodemon app.js"
+        "start": "node app.js"
     },
-    "keywords": [],
-    "author": "",
+    "author": "master",
     "license": "ISC",
     "dependencies": {
         "dotenv": "^16.0.3",

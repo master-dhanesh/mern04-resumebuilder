@@ -1,15 +1,27 @@
 require("dotenv").config({ path: "./.env" });
-const logger = require("morgan");
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT;
 
-const indexRoute = require("./routes/indexRoute");
-
+// logging
+const logger = require("morgan");
 app.use(logger("tiny"));
+// bodyparser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", indexRoute);
+// routes
+const indexRoutes = require("./routes/indexRoutes");
+app.use("/", indexRoutes);
 
-app.listen(PORT, console.log(`Server running on port ${PORT}`));
+// error handling
+const ErrorHandler = require("./utils/ErrorHandler");
+const { createErrors } = require("./middleware/errors");
+app.all("*", (req, res, next) => {
+    next(new ErrorHandler(`Requested URL ${req.path} not found`, 404));
+});
+app.use(createErrors);
+
+app.listen(
+    process.env.PORT,
+    console.log(`Server running on ${process.env.PORT}`)
+);
