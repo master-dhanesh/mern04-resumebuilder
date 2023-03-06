@@ -1,11 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { homepage, createuser } = require("../controllers/indexControllers");
+const {
+    homepage,
+    createuser,
+    signinuser,
+    signoutuser,
+} = require("../controllers/indexControllers");
+const { isAuthorizedUser } = require("../middleware/auth");
 
 // @api - get /
-router.get("/", homepage);
+router.get("/", isAuthorizedUser, homepage);
 
-// @api - post /createuser
-router.post("/createuser", createuser);
+// @api - post /signup
+router.post("/signup", createuser);
+
+// @api - post /signin
+router.post("/signin", signinuser);
+
+// @api - get /signout
+router.get("/signout", signoutuser);
 
 module.exports = router;
