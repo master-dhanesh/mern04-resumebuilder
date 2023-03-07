@@ -9,6 +9,7 @@ exports.sendToken = (user, res, statusCode) => {
     };
     res.status(statusCode).cookie("token", token, options).json({
         success: true,
+        id: user._id,
         token,
     });
 };
