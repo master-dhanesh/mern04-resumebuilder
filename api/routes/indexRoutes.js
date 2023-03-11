@@ -9,6 +9,7 @@ const {
     verifyotp,
     resetpassword,
     updateuser,
+    updateavatar,
 } = require("../controllers/indexControllers");
 const { isAuthorizedUser } = require("../middleware/auth");
 
@@ -35,5 +36,8 @@ router.post("/reset-password/:id", isAuthorizedUser, resetpassword);
 
 // @api - post /update-user/:id
 router.post("/update-user/:id", isAuthorizedUser, updateuser);
+
+// @api - post /avatar/:id
+router.post("/avatar/:id", isAuthorizedUser, updateavatar);
 
 module.exports = router;

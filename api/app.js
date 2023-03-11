@@ -23,6 +23,9 @@ app.use(
 // cookie-parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+// express file upload
+const fileUpload = require("express-fileupload");
+app.use(fileUpload());
 
 // routes
 const indexRoutes = require("./routes/indexRoutes");

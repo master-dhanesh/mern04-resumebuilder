@@ -15,6 +15,6 @@ exports.createErrors = (err, req, res, next) => {
     res.status(statusCode).json({
         message: err.message,
         errname: err.name,
-        // stack: err.stack,
+        stack: err.stack,
     });
 };
