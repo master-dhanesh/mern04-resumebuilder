@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const resumeModel = new mongoose.Schema(
     {
         profileinfo: { type: mongoose.Schema.Types.ObjectId, ref: "user" },

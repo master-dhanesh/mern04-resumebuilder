@@ -10,6 +10,8 @@ const {
     resetpassword,
     updateuser,
     updateavatar,
+    createresume,
+    readresumes,
 } = require("../controllers/indexControllers");
 const { isAuthorizedUser } = require("../middleware/auth");
 
@@ -39,5 +41,13 @@ router.post("/update-user/:id", isAuthorizedUser, updateuser);
 
 // @api - post /avatar/:id
 router.post("/avatar/:id", isAuthorizedUser, updateavatar);
+
+// --------------------------------------------------------------------
+
+// @api - post /resume/create/:userid
+router.post("/resume/create/:id", isAuthorizedUser, createresume);
+
+// @api - post /resume/readall/:userid
+router.post("/resume/readall/", isAuthorizedUser, readresumes);
 
 module.exports = router;

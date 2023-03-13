@@ -49,7 +49,7 @@ const userModel = new mongoose.Schema(
                 behance: "",
             },
         },
-        resume: [{ type: mongoose.Schema.Types.ObjectId, ref: "resume" }],
+        resumes: [{ type: mongoose.Schema.Types.ObjectId, ref: "resume" }],
         otp: String,
     },
     { timestamps: true }

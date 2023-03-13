@@ -1,0 +1,40 @@
+{
+    "personalinfo": {
+        "name": "dhanesh malviya",
+        "email": "dhanesh1296@gmail.com",
+        "contact": "8602361158",
+        "links": {
+            "github": "https://github.com/master-dhanesh",
+            "linkedin": "https://in.linkedin.com/in/masterdhanesh?trk=org-employees"
+        }
+    },
+    "education": [
+        {
+            "institute": "RITS Bhopal",
+            "degree": "B.Tech",
+            "board": "RGPV",
+            "year": "2018-2022",
+            "grades": "8.9CGPA"
+        }
+    ],
+    "skills": [
+        { "skillname": "Full Stack Web Developer", "certificate": "image.png" }
+    ],
+    "project": [
+        {
+            "projectname": "Resume Builder",
+            "technology": "html css js node react",
+            "description": "User will be able to create multiple resume",
+            "link": "https://github.com/master-dhanesh/resumebuilderonline"
+        }
+    ],
+    "experience": [
+        {
+            "companyname": "Sheryians pvt. ltd.",
+            "designation": "Director",
+            "from": "2018 Nov",
+            "to": "Present"
+        }
+    ],
+    "interest": [{ "title": "Dancing", "certificate": "xyz.png" }]
+}

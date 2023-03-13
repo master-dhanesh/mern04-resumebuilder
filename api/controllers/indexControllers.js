@@ -1,6 +1,7 @@
 const path = require("path");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
+const Resume = require("../models/resumeModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 const { sendmailotp } = require("../utils/sendmailotp");
 const { sendToken } = require("../utils/sendtoken");
@@ -94,4 +95,19 @@ exports.updateavatar = catchAsyncErrors(async (req, res, next) => {
     user.avatar = { fileId, url };
     await user.save();
     res.status(200).json({ success: true, message: "Profile updated" });
+});
+
+exports.createresume = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id).exec();
+    const newresume = new Resume(req.body);
+    newresume.profileinfo = user._id;
+    user.resumes.push(newresume._id);
+    await newresume.save();
+    await user.save();
+    res.status(200).json({ success: true, message: "Resume created!" });
+});
+
+exports.readresumes = catchAsyncErrors(async (req, res, next) => {
+    const resumes = await Resume.find().populate("profileinfo").exec();
+    res.status(200).json({ success: true, resumes });
 });
