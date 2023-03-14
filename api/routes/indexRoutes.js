@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
     homepage,
+    currentUser,
     createuser,
     signinuser,
     signoutuser,
@@ -16,7 +17,10 @@ const {
 const { isAuthorizedUser } = require("../middleware/auth");
 
 // @api - get /
-router.get("/", isAuthorizedUser, homepage);
+router.get("/", homepage);
+
+// @api - post /me
+router.post("/me", isAuthorizedUser, currentUser);
 
 // @api - post /signup
 router.post("/signup", createuser);

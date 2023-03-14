@@ -11,6 +11,11 @@ exports.homepage = (req, res, next) => {
     res.json({ message: "This is homepage", user: req.user });
 };
 
+exports.currentUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.id).exec();
+    res.status(200).json({ success: true, user });
+});
+
 exports.createuser = catchAsyncErrors(async (req, res, next) => {
     const user = await new User(req.body).save();
 
