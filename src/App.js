@@ -1,25 +1,39 @@
 import React, { useEffect } from "react";
-import { async_loaduser, async_signin } from "./store/Actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { async_loaduser } from "./store/Actions/userActions";
+import { useDispatch } from "react-redux";
+import Navigation from "./components/Navigation";
+import { Route, Routes } from "react-router-dom";
+import Homepage from "./components/Homepage";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
+import Profile from "./components/Profile";
+import ProtectedRoute from "./helpers/ProtectedRoute";
 
 const App = () => {
     const dispatch = useDispatch();
-    const { errors } = useSelector((state) => state.userReducer);
 
     useEffect(() => {
         dispatch(async_loaduser());
     }, []);
 
-    if (errors.length > 0) {
-        errors.forEach((err) => {
-            toast.error(err);
-        });
-    }
-
     return (
         <div>
-            <button onClick={() => dispatch(async_signin())}>Login User</button>
+            <Navigation />
+            <hr />
+            <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/signin" element={<Signin />} />
+                {/* ------------------------------------------------------- */}
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <Profile />
+                        </ProtectedRoute>
+                    }
+                />
+            </Routes>
         </div>
     );
 };

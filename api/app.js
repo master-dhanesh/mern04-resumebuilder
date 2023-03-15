@@ -24,7 +24,8 @@ app.use(
     })
 );
 // cors
-app.use(require("cors")({ credentials: true }));
+const cors = require("cors");
+app.use(cors({ origin: true, credentials: true }));
 
 // express file upload
 const fileUpload = require("express-fileupload");
