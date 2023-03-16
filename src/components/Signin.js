@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { async_signin } from "../store/Actions/userActions";
 
 const Signin = () => {
@@ -17,6 +17,7 @@ const Signin = () => {
         <div>
             <h4>Signin</h4>
             <button onClick={() => dispatch(async_signin())}>Signin</button>
+            <Link to="/sendmail">Forget Password</Link>
         </div>
     );
 };

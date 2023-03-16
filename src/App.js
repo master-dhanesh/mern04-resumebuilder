@@ -8,6 +8,9 @@ import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./helpers/ProtectedRoute";
+import Sendmail from "./components/Sendmail";
+import Verifyotp from "./components/Verifyotp";
+import Reset from "./components/Reset";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -24,12 +27,27 @@ const App = () => {
                 <Route path="/" element={<Homepage />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
+                <Route path="/sendmail" element={<Sendmail />}>
+                    <Route
+                        path="/sendmail/:email/verify"
+                        element={<Verifyotp />}
+                    />
+                </Route>
+
                 {/* ------------------------------------------------------- */}
                 <Route
                     path="/profile"
                     element={
                         <ProtectedRoute>
                             <Profile />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/reset"
+                    element={
+                        <ProtectedRoute>
+                            <Reset />
                         </ProtectedRoute>
                     }
                 />

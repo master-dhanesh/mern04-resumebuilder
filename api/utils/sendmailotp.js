@@ -20,7 +20,7 @@ exports.sendmailotp = async (user, res) => {
     };
 
     await transport.sendMail(mailOptions, async (err, info) => {
-        if (err) return res.send(err);
+        if (err) return res.status(500).json({ message: err.response });
         console.log(info);
         user.otp = generateOTP;
         await user.save();
