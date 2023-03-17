@@ -38,3 +38,68 @@
     ],
     "interest": [{ "title": "Dancing", "certificate": "xyz.png" }]
 }
+
+/*
+
+ {
+            id: "institute",
+            placeholder: "Instutute Name",
+            type: "text",
+            validationType: "string",
+            validations: [
+                {
+                    type: "required",
+                    params: ["Instutute name is required"],
+                },
+            ],
+        },
+        {
+            id: "degree",
+            placeholder: "Degree",
+            type: "text",
+            validationType: "string",
+            validations: [
+                {
+                    type: "required",
+                    params: ["Degree name is required"],
+                },
+            ],
+        },
+        {
+            id: "university",
+            placeholder: "University Name",
+            type: "text",
+            validationType: "string",
+            validations: [
+                {
+                    type: "required",
+                    params: ["University name is required"],
+                },
+            ],
+        },
+        {
+            id: "year",
+            placeholder: "Year",
+            type: "text",
+            validationType: "string",
+            validations: [
+                {
+                    type: "required",
+                    params: ["Year is required"],
+                },
+            ],
+        },
+        {
+            id: "grade",
+            placeholder: "Final Grades",
+            type: "text",
+            validationType: "string",
+            validations: [
+                {
+                    type: "required",
+                    params: ["Grade is required"],
+                },
+            ],
+        },
+
+*/

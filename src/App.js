@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./style.css";
 import { async_loaduser } from "./store/Actions/userActions";
 import { useDispatch } from "react-redux";
 import Navigation from "./components/Navigation";
@@ -11,6 +12,7 @@ import ProtectedRoute from "./helpers/ProtectedRoute";
 import Sendmail from "./components/Sendmail";
 import Verifyotp from "./components/Verifyotp";
 import Reset from "./components/Reset";
+import CreateResume from "./components/CreateResume";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -48,6 +50,14 @@ const App = () => {
                     element={
                         <ProtectedRoute>
                             <Reset />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/create-resume"
+                    element={
+                        <ProtectedRoute>
+                            <CreateResume />
                         </ProtectedRoute>
                     }
                 />
