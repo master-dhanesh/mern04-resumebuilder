@@ -5,6 +5,7 @@ export * from "../Reducers/userSlice";
 export const async_loaduser = () => async (dispatch, getState) => {
     try {
         const { data } = await axios.post("/me");
+        // console.log(data);
         dispatch(loaduser(data.user));
     } catch (error) {
         dispatch(_error(error.response.data.message));
@@ -66,6 +67,37 @@ export const async_resetpassword = (id) => async (dispatch, getState) => {
             newpassword: "654321",
         });
         // console.log(d.data);
+    } catch (error) {
+        dispatch(_error(error.response.data.message));
+    }
+};
+
+export const async_createresume = () => async (dispatch, getState) => {
+    try {
+        const resumedets = {
+            education: JSON.parse(localStorage.getItem("education")) || [],
+            skill: JSON.parse(localStorage.getItem("skill")) || [],
+            experience: JSON.parse(localStorage.getItem("experience")) || [],
+            projects: JSON.parse(localStorage.getItem("projects")) || [],
+            interest: JSON.parse(localStorage.getItem("interest")) || [],
+        };
+        const id = getState().userReducer.user._id;
+        const { data } = await axios.post("/resume/create/" + id, resumedets);
+        console.log(data);
+        dispatch(async_loaduser(data.user));
+        // localstorage empty code
+    } catch (error) {
+        dispatch(_error(error.response.data.message));
+    }
+};
+
+export const async_uploadimage = (formData) => async (dispatch, getState) => {
+    try {
+        const id = getState().userReducer.user._id;
+        const { data } = await axios.post("/avatar/" + id, formData);
+        console.log(data);
+        dispatch(async_loaduser(data.user));
+        // localstorage empty code
     } catch (error) {
         dispatch(_error(error.response.data.message));
     }

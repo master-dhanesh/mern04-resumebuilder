@@ -12,7 +12,7 @@ exports.homepage = (req, res, next) => {
 };
 
 exports.currentUser = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.id).exec();
+    const user = await User.findById(req.id).populate("resumes").exec();
     res.status(200).json({ success: true, user });
 });
 
@@ -84,6 +84,8 @@ exports.updateuser = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.updateavatar = catchAsyncErrors(async (req, res, next) => {
+    console.log("body >>>>", req.body);
+    console.log("files >>>>", req.files);
     const user = await User.findById(req.params.id);
     const file = req.files.avatar;
     const modifiedName = `resumebuilder-${Date.now()}${path.extname(

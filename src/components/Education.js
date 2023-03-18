@@ -1,69 +1,82 @@
 import React, { useState } from "react";
-import DynamicForm from "dynamic-form-json";
 
 const Education = () => {
-    const [create, setCreate] = useState({
-        id: "",
-        placeholder: "",
-        type: "text",
-        validationType: "string",
-        validations: [
-            {
-                type: "required",
-                params: ["field is required"],
-            },
-        ],
-    });
+    const educationTemplate = {
+        institute: "",
+        university: "",
+        degree: "",
+        grade: "",
+        year: "",
+    };
+    const [education, setEducation] = useState(
+        JSON.parse(localStorage.getItem("education")) || [educationTemplate]
+    );
 
-    const [formData, setFormData] = useState([]);
-    const ChangeHandler = (e) => {
-        setCreate({ ...create, [e.target.name]: e.target.value });
+    const Changehandler = (e, index) => {
+        const updatedEducation = education.map((edu, i) =>
+            index == i ? { ...edu, [e.target.name]: e.target.value } : edu
+        );
+        setEducation(updatedEducation);
     };
 
-    const CreateElementHandler = (e) => {
-        e.preventDefault();
-        setFormData([...formData, create]);
-        setCreate({
-            id: "",
-            placeholder: "",
-            type: "text",
-            validationType: "string",
-            validations: [
-                {
-                    type: "required",
-                    params: ["field is required"],
-                },
-            ],
-        });
+    const AddHandler = () => {
+        setEducation([...education, educationTemplate]);
+    };
+    const DeleteHandler = (index) => {
+        const copyEducation = [...education];
+        copyEducation.splice(index, 1);
+        setEducation(copyEducation);
+        localStorage.setItem("education", JSON.stringify(copyEducation));
     };
 
-    const EducationHandler = (formData) => {
-        console.log(formData);
+    const SaveEducation = () => {
+        localStorage.setItem("education", JSON.stringify(education));
     };
 
     return (
         <div>
-            <h3>Education</h3>
-            <form onSubmit={CreateElementHandler}>
-                <input
-                    type="text"
-                    name="id"
-                    value={create.id}
-                    onChange={ChangeHandler}
-                    placeholder="Name of the Field"
-                />
-                <input
-                    type="text"
-                    name="placeholder"
-                    value={create.placeholder}
-                    onChange={ChangeHandler}
-                    placeholder="Placeholder of the Field"
-                />
-
-                <button>Create Element</button>
-            </form>
-            <hr />
-            <DynamicForm fields={formData} cbSubmit={EducationHandler} />
+            {education.map((e, idx) => (
+                <div key={idx}>
+                    <input
+                        name="institute"
+                        type="text"
+                        placeholder="Institute Name"
+                        onChange={(e) => Changehandler(e, idx)}
+                        value={education[idx].institute}
+                    />
+                    <input
+                        name="university"
+                        type="text"
+                        placeholder="University Name"
+                        onChange={(e) => Changehandler(e, idx)}
+                        value={education[idx].university}
+                    />
+                    <input
+                        name="degree"
+                        type="text"
+                        placeholder="Degree Name"
+                        onChange={(e) => Changehandler(e, idx)}
+                        value={education[idx].degree}
+                    />
+                    <input
+                        name="grade"
+                        type="text"
+                        placeholder="Grade"
+                        onChange={(e) => Changehandler(e, idx)}
+                        value={education[idx].grade}
+                    />
+                    <input
+                        name="year"
+                        type="text"
+                        placeholder="Year"
+                        onChange={(e) => Changehandler(e, idx)}
+                        value={education[idx].year}
+                    />
+                    <span onClick={() => DeleteHandler(idx)}>❌</span>
+                </div>
+            ))}
+            <button onClick={SaveEducation}>Save</button> <br />
+            <button onClick={AddHandler}>Add More</button>
         </div>
     );
 };

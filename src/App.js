@@ -13,6 +13,8 @@ import Sendmail from "./components/Sendmail";
 import Verifyotp from "./components/Verifyotp";
 import Reset from "./components/Reset";
 import CreateResume from "./components/CreateResume";
+import Templates from "./components/Templates";
+import ProfessionalResume from "./components/resumetemplates/ProfessionalResume";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -61,6 +63,19 @@ const App = () => {
                         </ProtectedRoute>
                     }
                 />
+                <Route
+                    path="/templates"
+                    element={
+                        <ProtectedRoute>
+                            <Templates />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route
+                        path="/templates/1"
+                        element={<ProfessionalResume />}
+                    />
+                </Route>
             </Routes>
         </div>
     );

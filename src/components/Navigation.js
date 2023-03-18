@@ -19,6 +19,7 @@ const Navigation = () => {
                 <>
                     <Link to="/profile">Profile</Link> <br />
                     <Link to="/create-resume">Create Resume</Link> <br />
+                    <Link to="/templates">Resume Templates</Link> <br />
                     <Link to="/reset">Reset Password</Link> <br />
                     <button onClick={() => dispatch(async_removeuser())}>
                         Signout
