@@ -1,6 +1,8 @@
 require("dotenv").config({ path: "./.env" });
 const express = require("express");
+const http = require("http");
 const app = express();
+const { Server } = require("socket.io");
 
 // database connectivity
 require("./models/database").getconnection();
@@ -43,7 +45,42 @@ app.all("*", (req, res, next) => {
 });
 app.use(createErrors);
 
-app.listen(
+// ---------------------------------socket
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: true,
+    method: ["GET", "POST"],
+});
+
+let users = [];
+let connections = [];
+
+io.on("connection", (socket) => {
+    connections.push(socket);
+    console.log(`Connected: ${connections.length} sockets connected.`);
+
+    // New User
+    socket.on("new user", (data) => {
+        socket.username = data;
+        users.push(socket.username);
+        io.emit("get users", users);
+    });
+
+    // Send Message
+    socket.on("send message", (data) => {
+        // code to save message in db
+        io.emit("new message", { msg: data, user: socket.username });
+    });
+
+    socket.on("disconnect", (data) => {
+        users.splice(connections.indexOf(socket), 1);
+        io.emit("get users", users);
+        connections.splice(connections.indexOf(socket.username), 1);
+        console.log(`Disconnected: ${connections.length} sockets connected.`);
+    });
+});
+
+server.listen(
     process.env.PORT,
     console.log(`Server running on ${process.env.PORT}`)
 );

@@ -15,6 +15,7 @@ import Reset from "./components/Reset";
 import CreateResume from "./components/CreateResume";
 import Templates from "./components/Templates";
 import ProfessionalResume from "./components/resumetemplates/ProfessionalResume";
+import Support from "./components/Support";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const App = () => {
             <hr />
             <Routes>
                 <Route path="/" element={<Homepage />} />
+                <Route path="/support" element={<Support />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/sendmail" element={<Sendmail />}>
