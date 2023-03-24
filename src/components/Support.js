@@ -21,7 +21,7 @@ const Support = () => {
         e.preventDefault();
         socket.emit("send message", message);
         socket.on("new message", (data) => {
-            setRecieved([...recieved, data]);
+            setRecieved(data);
         });
     };
 
@@ -30,7 +30,7 @@ const Support = () => {
             setOnline(data);
         });
         socket.on("new message", (data) => {
-            setRecieved([...recieved, data]);
+            setRecieved(data);
         });
     }, []);
     console.log(recieved);

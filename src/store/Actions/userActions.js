@@ -22,12 +22,9 @@ export const async_removeuser = () => async (dispatch, getState) => {
     }
 };
 
-export const async_signin = () => async (dispatch, getState) => {
+export const async_signin = (user) => async (dispatch, getState) => {
     try {
-        const d = await axios.post("/signin", {
-            email: "john@doe.com",
-            password: "654321",
-        });
+        const d = await axios.post("/signin", user);
         // console.log(d.data);
         dispatch(async_loaduser());
     } catch (error) {

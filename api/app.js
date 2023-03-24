@@ -54,6 +54,7 @@ const io = new Server(server, {
 
 let users = [];
 let connections = [];
+let messages = [];
 
 io.on("connection", (socket) => {
     connections.push(socket);
@@ -69,7 +70,8 @@ io.on("connection", (socket) => {
     // Send Message
     socket.on("send message", (data) => {
         // code to save message in db
-        io.emit("new message", { msg: data, user: socket.username });
+        messages.push({ msg: data, user: socket.username });
+        io.emit("new message", messages);
     });
 
     socket.on("disconnect", (data) => {
@@ -77,6 +79,9 @@ io.on("connection", (socket) => {
         io.emit("get users", users);
         connections.splice(connections.indexOf(socket.username), 1);
         console.log(`Disconnected: ${connections.length} sockets connected.`);
+        if (connections.length === 0) {
+            messages = [];
+        }
     });
 });
 
