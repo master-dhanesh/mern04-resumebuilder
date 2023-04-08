@@ -35,7 +35,7 @@ app.use(fileUpload());
 
 // routes
 const indexRoutes = require("./routes/indexRoutes");
-app.use("/", indexRoutes);
+app.use("/api", indexRoutes);
 
 // error handling
 const ErrorHandler = require("./utils/ErrorHandler");
